@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trần Quốc Bảo (Notrix) | Personal Profile</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151c2c;
+      --accent-blue: #38bdf8;
+      --accent-purple: #818cf8;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --code-bg: #090d16;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1e293b, var(--bg));
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Container cho Avatar + nút upload */
+    .avatar-container {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 16px;
+    }
+
+    .avatar-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #334155;
+    }
+
+    /* Nút đổi Avatar */
+    .upload-btn {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background-color: var(--accent-blue);
+      color: #0f172a;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: all 0.2s ease;
+      border: 2px solid var(--card-bg);
+    }
+
+    .upload-btn:hover {
+      transform: scale(1.1);
+      background-color: #fff;
+    }
+
+    #avatar-input {
+      display: none;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nickname {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: 20px;
+    }
+
+    .bio-code-box {
+      background-color: var(--code-bg);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .bio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .bio-title {
+      font-size: 0.75rem;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .copy-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: none;
+      color: var(--accent-blue);
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(56, 189, 248, 0.3);
+    }
+
+    .bio-code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      word-break: break-all;
+      line-height: 1.4;
+      user-select: all;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--subtext);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      background-color: rgba(56, 189, 248, 0.12);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.25s ease;
+    }
+
+    .link-item i {
+      font-size: 1.2rem;
+    }
+
+    .link-item:hover {
+      background-color: var(--accent-blue);
+      color: #0f172a;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Phần Avatar -->
+    <div class="avatar-container">
+      <div class="avatar-wrapper">
+        <img id="avatar-img" class="avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=Notrix" alt="Avatar">
+      </div>
+      <label for="avatar-input" class="upload-btn" title="Đổi ảnh đại diện">
+        <i class="fa-solid fa-camera"></i>
+      </label>
+      <input type="file" id="avatar-input" accept="image/*">
+    </div>
+    
+    <h1>Trần Quốc Bảo</h1>
+    <div class="nickname">@Notrix</div>
+
+    <!-- Bio dạng mã Script -->
+    <div class="bio-code-box">
+      <div class="bio-header">
+        <div class="bio-title"><i class="fa-solid fa-code"></i> Bio / Script:</div>
+        <button class="copy-btn" onclick="copyScript()"><i class="fa-regular fa-copy"></i> Sao chép</button>
+      </div>
+      <div class="bio-code" id="script-code">script ajjinsloadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/36107afd3107e8d841f9d1a69e2465d4.lua"))()</div>
+    </div>
+
+    <div class="section-title">Sở thích & Tựa game</div>
+    <div class="tags">
+      <span class="tag"><i class="fa-solid fa-cube"></i> Roblox VNG</span>
+      <span class="tag"><i class="fa-solid fa-gamepad"></i> Free Fire</span>
+      <span class="tag"><i class="fa-solid fa-futbol"></i> Bóng đá</span>
+    </div>
+
+    <div class="section-title">Kết nối với tôi</div>
+    <div class="links">
+      <a href="https://www.tiktok.com/@trquocbao67?_r=1&_t=ZS-9A4pWRxTflJ" target="_blank" class="link-item">
+        <span><i class="fa-brands fa-tiktok"></i> TikTok</span>
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Thay đổi avatar khi chọn file
+    document.getElementById('avatar-input').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.getElementById('avatar-img').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Hàm sao chép script
+    function copyScript() {
+      const textToCopy = document.getElementById('script-code').innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert('Đã sao chép Script!');
+      });
+    }
+  </script>
+
+</body>
+</html>
